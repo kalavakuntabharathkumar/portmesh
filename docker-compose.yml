@@ -1,0 +1,16 @@
+services:
+  portfolio:
+    build: ./services/portfolio
+    ports: ["8001:8001"]
+  transaction:
+    build: ./services/transaction
+    ports: ["8002:8002"]
+  pricing:
+    build: ./services/pricing
+    ports: ["8003:8003"]
+  dashboard:
+    image: nginx:alpine
+    ports: ["8080:80"]
+    volumes:
+      - ./dashboard:/usr/share/nginx/html:ro
+    depends_on: [portfolio, transaction, pricing]
